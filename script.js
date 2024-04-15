@@ -42,26 +42,27 @@ let characters = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19
 let arrayCharactes = [];
 let str = characters.charAt(0);
 let row = [];
-for (let k = 1; k < characters.length; k++) {
-   if (characters.substring(k - 1, k) === "\n") {
-        // if(str.endsWith("\n")) {
-        //     let strCopy = str;
-        //     str = "";
-        //     for(let l = 0; l < strCopy.length - 1; l++) {
-        //         str += strCopy.charAt(l);
-        //     }
-        // }
+for (let k = 1; k < characters.length; k++) { // staring with index one because we need to check two characters at the same time.
+   if (characters.substring(k - 1, k) === "\n") { // checking if it is a new row
+        if(str.endsWith("\n")) {      //Removing the \n at the end of a string.
+            let strCopy = str;
+            str = "";
+            for(let l = 0; l < strCopy.length - 1; l++) {
+                str += strCopy.charAt(l);
+            } 
+        }
         row.push(str);
         arrayCharactes.push(row);
         row = [];
         str = characters.charAt(k);
-    } else if (characters.charAt(k) === ",") {
+    } else if (characters.charAt(k) === ",") { //Adding a new column when with reach the comma.
         row.push(str);
         str = "";
     } else {
         str += characters.charAt(k);
     }
 }
+// Adding the last row to the main array.
 row.push(str);
 arrayCharactes.push(row);
 

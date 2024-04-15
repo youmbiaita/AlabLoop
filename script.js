@@ -43,24 +43,30 @@ let arrayCharactes = [];
 let str = characters.charAt(0);
 let row = [];
 for (let k = 1; k < characters.length; k++) {
-    if (characters.substring(k - 1, k) === "\n") {
-        continue;
-    } else if (characters.substring(k - 2, k - 1) === "\n") {
+   if (characters.substring(k - 1, k) === "\n") {
+        // if(str.endsWith("\n")) {
+        //     let strCopy = str;
+        //     str = "";
+        //     for(let l = 0; l < strCopy.length - 1; l++) {
+        //         str += strCopy.charAt(l);
+        //     }
+        // }
         row.push(str);
         arrayCharactes.push(row);
         row = [];
+        str = characters.charAt(k);
+    } else if (characters.charAt(k) === ",") {
+        row.push(str);
+        str = "";
     } else {
-        if (characters.charAt(k) === ",") {
-            if (characters.substring(k - 1, k) !== "\n") {
-                str += characters.charAt(k);
-            } else {
-                row.push(str);
-                str = "";
-            }
-        }
+        str += characters.charAt(k);
     }
 }
+row.push(str);
+arrayCharactes.push(row);
+
 console.log(arrayCharactes);
+
 
 
 
